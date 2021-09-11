@@ -8,6 +8,7 @@ ARG CERTBOT_NETCUP_VERSION
 ARG CERTBOT_NJALLA_VERSION
 ARG CERTBOT_GANDI_VERSION
 ARG CERTBOT_DNS_TRANSIP_VERSION
+ARG CERTBOT_DNS_GODADDY_VERSION
 
 RUN apk add --no-cache --update \
         libffi \
@@ -40,6 +41,7 @@ RUN apk add --no-cache --update \
         certbot-dns-netcup==${CERTBOT_NETCUP_VERSION} \
         certbot-plugin-gandi==${CERTBOT_GANDI_VERSION} \
         certbot-dns-transip==${CERTBOT_DNS_TRANSIP_VERSION} \
+        certbot-dns-godaddy==${CERTBOT_DNS_GODADDY_VERSION} \
     && apk del .build-dependencies
 
 # Copy data
