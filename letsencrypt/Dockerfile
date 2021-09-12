@@ -20,7 +20,7 @@ RUN apkArch="$(apk --print-arch)"; \
           armv7) export ARCH='armv7' ;; \
           x86_64) export ARCH='amd64' ;; \
           aarch64) export ARCH='aarch64' ;; \
-      esac; \
+      esac;
         
 RUN apk add --no-cache --update \
         libffi \
