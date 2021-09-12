@@ -19,6 +19,8 @@ RUN apk add --no-cache --update \
         libffi-dev \
         musl-dev \
         openssl-dev \
+    && pip3 install setuptools==57.5.0 \
+    && echo -e "cffi==1.14.6\ncryptography==3.4.8\nsetuptools==57.5.0" > /tmp/requirements.txt \
     && pip3 install --no-cache-dir --find-links \
         "https://wheels.home-assistant.io/alpine-$(cut -d '.' -f 1-2 < /etc/alpine-release)/${BUILD_ARCH}/" \
         certbot==${CERTBOT_VERSION} \
@@ -42,6 +44,7 @@ RUN apk add --no-cache --update \
         certbot-plugin-gandi==${CERTBOT_GANDI_VERSION} \
         certbot-dns-transip==${CERTBOT_DNS_TRANSIP_VERSION} \
         certbot-dns-godaddy==${CERTBOT_DNS_GODADDY_VERSION} \
+        -c /tmp/requirements.txt \
     && apk del .build-dependencies
 
 # Copy data
