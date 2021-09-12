@@ -1,3 +1,4 @@
+ARG
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
@@ -10,6 +11,17 @@ ARG CERTBOT_GANDI_VERSION
 ARG CERTBOT_DNS_TRANSIP_VERSION
 ARG CERTBOT_DNS_GODADDY_VERSION
 
+RUN export TEMPZ=$(echo "${BUILD_FROM}" | cut -d "-" -f 1 | cut -d "/" -f 2) && echo $TEMPZ
+
+RUN apkArch="$(apk --print-arch)"; \
+      case "$apkArch" in \
+          armhf) export ARCH='armhf' ;; \
+          x86) export ARCH='i386' ;; \
+          armv7) export ARCH='armv7' ;; \
+          x86_64) export ARCH='amd64' ;; \
+          aarch64) export ARCH='aarch64' ;; \
+      esac; \
+        
 RUN apk add --no-cache --update \
         libffi \
         musl \
@@ -25,7 +37,7 @@ RUN apk add --no-cache --update \
     && echo "setuptools==57.5.0" >> /tmp/requirements.txt \
     && TEMPZ=$(echo "${BUILD_FROM}" | cut -d "-" -f 1 | cut -d "/" -f 2) && echo $TEMPZ \
     && pip3 install --no-cache-dir --find-links \
-        "https://wheels.home-assistant.io/alpine-$(cut -d '.' -f 1-2 < /etc/alpine-release)/${BUILDARCH}/" \
+        "https://wheels.home-assistant.io/alpine-$(cut -d '.' -f 1-2 < /etc/alpine-release)/${ARCH}/" \
         certbot==${CERTBOT_VERSION} \
         certbot-dns-cloudflare==${CERTBOT_VERSION} \
         certbot-dns-cloudxns==${CERTBOT_VERSION} \
