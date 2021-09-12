@@ -31,7 +31,7 @@ RUN apk add --no-cache --update \
          armv7) export ARCH='armv7' ;; \
          x86_64) export ARCH='amd64' ;; \
          aarch64) export ARCH='aarch64' ;; \
-        esac;
+        esac \
     && pip3 install --no-cache-dir --find-links \
         "https://wheels.home-assistant.io/alpine-$(cut -d '.' -f 1-2 < /etc/alpine-release)/${ARCH}/" \
         certbot==${CERTBOT_VERSION} \
