@@ -19,6 +19,11 @@ RUN apk add --no-cache --update \
         libffi-dev \
         musl-dev \
         openssl-dev \
+    && pip3 install setuptools==57.5.0 \
+    && echo "cffi==1.14.6" >> /tmp/requirements.txt \
+    && echo "cryptography==3.4.8" >> /tmp/requirements.txt \
+    && echo "setuptools==57.5.0" >> /tmp/requirements.txt \
+    && export TEMPZ=$(echo "${BUILD_FROM}" | cut -d "-" -f 1 | cut -d "/" -f 2) && echo $TEMPZ \
     && apkArch="$(apk --print-arch)"; \
        case "$apkArch" in \
          armhf) export ARCH='armhf' ;; \
@@ -26,12 +31,7 @@ RUN apk add --no-cache --update \
          armv7) export ARCH='armv7' ;; \
          x86_64) export ARCH='amd64' ;; \
          aarch64) export ARCH='aarch64' ;; \
-       esac; \
-    && pip3 install setuptools==57.5.0 \
-    && echo "cffi==1.14.6" >> /tmp/requirements.txt \
-    && echo "cryptography==3.4.8" >> /tmp/requirements.txt \
-    && echo "setuptools==57.5.0" >> /tmp/requirements.txt \
-    && export TEMPZ=$(echo "${BUILD_FROM}" | cut -d "-" -f 1 | cut -d "/" -f 2) && echo $TEMPZ \
+        esac;
     && pip3 install --no-cache-dir --find-links \
         "https://wheels.home-assistant.io/alpine-$(cut -d '.' -f 1-2 < /etc/alpine-release)/${ARCH}/" \
         certbot==${CERTBOT_VERSION} \
