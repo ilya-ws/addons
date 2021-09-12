@@ -23,8 +23,9 @@ RUN apk add --no-cache --update \
     && echo "cffi==1.14.6" >> /tmp/requirements.txt \
     && echo "cryptography==3.4.8" >> /tmp/requirements.txt \
     && echo "setuptools==57.5.0" >> /tmp/requirements.txt \
+    && TEMPZ=$(echo "${BUILD_FROM}" | cut -d "-" -f 1 | cut -d "/" -f 2) && echo $TEMPZ \
     && pip3 install --no-cache-dir --find-links \
-        "https://wheels.home-assistant.io/alpine-$(cut -d '.' -f 1-2 < /etc/alpine-release)/$(echo "${BUILD_FROM}" | cut -d "-" -f 1 | cut -d "/" -f 2)/" \
+        "https://wheels.home-assistant.io/alpine-$(cut -d '.' -f 1-2 < /etc/alpine-release)/${BUILDARCH}/" \
         certbot==${CERTBOT_VERSION} \
         certbot-dns-cloudflare==${CERTBOT_VERSION} \
         certbot-dns-cloudxns==${CERTBOT_VERSION} \
