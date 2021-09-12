@@ -11,9 +11,9 @@ echo -e "dns_godaddy_key = $(bashio::config 'dns.godaddy_key')\n" \
       "dns_cloudxns_api_key = $(bashio::config 'dns.cloudxns_api_key')\n" \
       "dns_cloudxns_secret_key = $(bashio::config 'dns.cloudxns_secret_key')\n" \
       "dns_digitalocean_token = $(bashio::config 'dns.digitalocean_token')\n" \
-      "certbot_dns_directadmin:directadmin_url = $(bashio::config 'dns.directadmin_url')\n" \
-      "certbot_dns_directadmin:directadmin_username = $(bashio::config 'dns.directadmin_username')\n" \
-      "certbot_dns_directadmin:directadmin_password = $(bashio::config 'dns.directadmin_password')\n" \
+      "directadmin_url = $(bashio::config 'dns.directadmin_url')\n" \
+      "directadmin_username = $(bashio::config 'dns.directadmin_username')\n" \
+      "directadmin_password = $(bashio::config 'dns.directadmin_password')\n" \
       "dns_dnsimple_token = $(bashio::config 'dns.dnsimple_token')\n" \
       "dns_dnsmadeeasy_api_key = $(bashio::config 'dns.dnsmadeeasy_api_key')\n" \
       "dns_dnsmadeeasy_secret_key = $(bashio::config 'dns.dnsmadeeasy_secret_key')\n" \
@@ -42,8 +42,8 @@ echo -e "dns_godaddy_key = $(bashio::config 'dns.godaddy_key')\n" \
       "dns_sakuracloud_api_token = $(bashio::config 'dns.sakuracloud_api_token')\n" \
       "dns_sakuracloud_api_secret = $(bashio::config 'dns.sakuracloud_api_secret')\n" \
       "dns_gandi_api_key = $(bashio::config 'dns.gandi_api_key')\n" \
-      "certbot_dns_transip:dns_transip_username = $(bashio::config 'dns.transip_username')\n" \
-      "certbot_dns_transip:dns_transip_key_file = /data/transip-rsa.key" > /data/dnsapikey
+      "dns_transip_username = $(bashio::config 'dns.transip_username')\n" \
+      "dns_transip_key_file = /data/transip-rsa.key" > /data/dnsapikey
 
 chmod 600 /data/dnsapikey
 
